@@ -1,0 +1,38 @@
+{{/* Make sure all variables are set properly */}}
+{{- include "tc.common.loader.init" . }}
+
+{{/* Render secrets for gitea */}}
+{{- include "keycloak.secrets" . }}
+
+{{/* Render configmap for gitea */}}
+{{- include "keycloak.configmap" . }}
+
+{{/* Append the general secret volumes to the volumes */}}
+{{- define "keycloak.initvolume" -}}
+enabled: "true"
+mountPath: "/secrets/ini"
+readOnly: true
+type: "custom"
+volumeSpec:
+  secret:
+    secretName: {{ include "tc.common.names.fullname" . }}-init
+    defaultMode: 0777
+{{- end -}}
+
+{{/* Append the general secret volumes to the volumes */}}
+{{- define "keycloak.configvolume" -}}
+enabled: "true"
+mountPath: "/secrets/config"
+readOnly: true
+type: "custom"
+volumeSpec:
+  secret:
+    secretName: {{ include "tc.common.names.fullname" . }}
+{{- end -}}
+
+{{- $_ := set .Values.persistence "init" (include "keycloak.initvolume" . | fromYaml) -}}
+{{- $_ := set .Values.persistence "config" (include "keycloak.configvolume" . | fromYaml) -}}
+
+
+{{/* Render the templates */}}
+{{ include "tc.common.loader.apply" . }}

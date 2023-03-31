@@ -1,0 +1,41 @@
+apiVersion: v2
+appVersion: "1.18.5"
+dependencies:
+  - name: common
+    repository: https://library-charts.truecharts.org
+    version: 11.1.2
+  - name: postgresql
+    version: 10.16.2
+    repository: https://charts.bitnami.com/bitnami
+    condition: postgresql.enabled
+deprecated: false
+description:  Open Source Identity and Access Management For Modern Applications and Services
+home: https://www.keycloak.org/
+icon: https://www.keycloak.org/resources/images/keycloak_icon_512px.svg
+sources:
+  - https://github.com/codecentric/helm-charts
+  - https://github.com/jboss-dockerfiles/keycloak
+  - https://github.com/bitnami/charts/tree/master/bitnami/postgresql
+keywords:
+  - authentication
+  - kerberos
+  - IDP
+  - SAML
+  - OpenID Connect
+  - OIDC
+  - SSO
+kubeVersion: ">=1.16.0-0"
+maintainers:
+  - email: simon.bordeyne@gmail.com
+    name: Simon Bordeyne
+    url: https://dogeek.me
+name: keycloak
+sources:
+  - https://github.com/dogeek/catalog/tree/master/stable/keycloak
+type: application
+version: 21.0
+annotations:
+  truecharts.org/catagories: |
+    - authentication
+  truecharts.org/SCALE-support: "true"
+  truecharts.org/grade: U

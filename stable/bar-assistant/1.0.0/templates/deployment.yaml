@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bar-assistant-deployment
+  labels:
+    app: bar-assistant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bar-assistant
+  template:
+    metadata:
+      labels:
+        app: bar-assistant
+    spec:
+      containers:
+      - name: backend
+        image: barassistant/server:latest
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - mountPath: /var/www/cocktails/storage/bar-assistant
+          name: bar-data
+      - name: frontend
+        image: barassistant/salt-rim:latest
+        ports:
+        - containerPort: 3000
+      - name: meilisearch
+        image: getmeili/meilisearch:v1.0
+        ports:
+        - containerPort: 7700
+        volumeMounts:
+        - mountPath: /meili-data
+          name: meilisearch-data
+        env:
+        - name: MEILI_MASTER_KEY
+          valueFrom:
+            secretKeyRef:
+              name: meilisearch-secret
+              key: meili-master-key
+        - name: MEILI_ENV
+          valueFrom:
+            configMapKeyRef:
+              name: meilisearch-env
+              key: meili_env
+      - name: redis
+        image: redis
+        ports:
+        - containerPort: 6379
+        env:
+        - name: ALLOW_EMPTY_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              name: redis-env
+              key: allow_empty_password
+      volumes:
+      - name: meilisearch-data
+        nfs:
+          server: localhost
+          path: /mnt/apps/config/bar-assistant/meilisearch
+          readOnly: false
+      - name: bar-data
+        nfs:
+          server: localhost
+          path: /mnt/apps/config/bar-assistant/bar
+          readOnly: false

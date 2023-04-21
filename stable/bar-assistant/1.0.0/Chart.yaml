@@ -1,0 +1,24 @@
+apiVersion: v2
+appVersion: "2023.4.21"
+dependencies:
+deprecated: false
+description:  Bar and cocktail manager
+home: https://bar-assistant.github.io/
+icon: https://raw.githubusercontent.com/Dogeek/catalog/tree/master/assets/bar-assistant.png
+sources:
+  - https://github.com/Dogeek/catalog
+keywords:
+  - Bar
+  - Cocktail
+  - Alcohol
+kubeVersion: ">=1.16.0-0"
+maintainers:
+  - email: simon.bordeyne@gmail.com
+    name: Simon Bordeyne
+    url: https://dogeek.me
+name: bar-assistant
+sources:
+  - https://github.com/dogeek/catalog/tree/master/stable/bar-assistant
+type: application
+version: 1.0.0
+annotations:

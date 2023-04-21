@@ -2,5 +2,34 @@
     "charts": {},
     "test": {},
     "stable": {
+      "bar-assistant": {
+        "name": "bar-assistant",
+        "categories": [
+            "bar"
+        ],
+        "app_readme": "<p>Organize your cocktail recipes</p>",
+        "location": "/home/runner/work/catalog/catalog/stable/bar-assistant",
+        "healthy": true,
+        "healthy_error": null,
+        "latest_version": "2023.4.21",
+        "latest_app_version": "1.0.0",
+        "latest_human_version": "1.0.0_2023.4.21",
+        "icon_url": "https://raw.githubusercontent.com/Dogeek/catalog/tree/master/assets/bar-assistant.png"
+      },
+      "keycloak": {},
+      "lokipusher": {
+        "name": "lokipusher",
+        "categories": [
+            "logging"
+        ],
+        "app_readme": "<p>Push logs to Loki</p>",
+        "location": "/home/runner/work/catalog/catalog/stable/lokipusher",
+        "healthy": true,
+        "healthy_error": null,
+        "latest_version": "20.0.8",
+        "latest_app_version": "1.0.0",
+        "latest_human_version": "1.0.0_20.0.8",
+        "icon_url": "https://raw.githubusercontent.com/Dogeek/catalog/tree/master/assets/lokipusher.png"
+      }
     }
 }
